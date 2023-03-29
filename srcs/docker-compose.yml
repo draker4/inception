@@ -3,22 +3,23 @@ version: "3"
 services:
 
   mariadb:
-    #image: mariadb:10
-    build: ./requirements/mariadb
-    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+    #container_name: mariadb
     ports:
       - 3306
     env_file:
       - .env
     volumes:
-      - mariadb_files:/var/lib/mysql
+      - db_files:/var/lib/mysql
     networks:
       - inception
+    restart: always
 
   wordpress:
     build:
       context: ./requirements/wordpress
-    container_name: wordpress
+    #container_name: wordpress
     depends_on:
       - mariadb
     ports:
@@ -29,11 +30,12 @@ services:
       - .env
     networks:
       - inception
+    restart: always
 
   nginx:
     build:
       context: ./requirements/nginx
-    container_name: nginx
+    #container_name: nginx
     depends_on:
       - wordpress
     ports:
@@ -44,6 +46,7 @@ services:
       - .env
     networks:
       - inception
+    restart: always
 
 volumes:
   wp_files:
@@ -52,13 +55,12 @@ volumes:
       type: none
       device: /home/bperriol/data/wordpress
       o: bind
-  mariadb_files:
+  db_files:
     driver: local
     driver_opts:
       type: none
-      device: /home/bperriol/data/mariadb
+      device: /home/bperriol/data/db
       o: bind
-
 
 networks:
   inception:

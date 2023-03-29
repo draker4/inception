@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:bullseye
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	mariadb-server \
@@ -7,8 +7,6 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 
 RUN mkdir -p /var/run/mysql \
 	&& chown -R mysql:mysql /var/run/mysql
-
-#COPY conf/my.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY tools/start_db.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/start_db.sh
