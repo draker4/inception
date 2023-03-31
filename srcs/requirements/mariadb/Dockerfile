@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:stable-20230320-slim
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	mariadb-server \

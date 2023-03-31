@@ -48,8 +48,8 @@ stop	:
 	$(DOCKER_COMPOSE) stop
 
 down	:
-	@printf "\033[0;33mStop and remove containers, networks, volumes, images\033[0m\n"
-	$(DOCKER_COMPOSE) down -v --rmi all --remove-orphans
+	@printf "\033[0;33mStop and remove containers and volumes\033[0m\n"
+	$(DOCKER_COMPOSE) down -v
 
 ps		:
 	@printf "\033[0;33mList all containers\033[0m\n"
@@ -75,7 +75,8 @@ $(DIR_DATA_WORDPRESS)	:
 
 # ---------  Usual Commands  --------  #
 
-clean				:	down
+clean				:
+	$(DOCKER_COMPOSE) down -v --rmi all --remove-orphans
 
 fclean				:	clean prune
 	sudo $(RM) $(DIR_DATA)

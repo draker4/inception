@@ -1,13 +1,10 @@
-FROM debian:bullseye
+FROM debian:stable-20230320-slim
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y \
-	redis \
+RUN apt-get update && apt-get install -y \
+    redis \
 	&& apt-get clean \
-	&& rm -rf /var/apt/list/*
+	&& rm -rf /var/lib/apt/lists/*
 
-COPY ./tools/redis.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/redis.sh
+EXPOSE 6379
 
-EXPOSE 
-
-CMD ["/usr/local/bin/redis.sh"]
+CMD ["redis-server", "--bind 0.0.0.0", "--maxmemory 20mb", "--maxmemory-policy allkeys-lfu", "--protected-mode no"]

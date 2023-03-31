@@ -1,9 +1,16 @@
-FROM debian:bullseye
+FROM debian:stable-20230320-slim
 
 RUN apt-get update && apt-get install -y \
 	mariadb-client \
-	php-mysql \
 	php7.4-fpm \
+	php-mysql \
+	php-curl \
+	php-dom \
+	php-imagick \
+	php-mbstring \
+	php-zip \
+	php-gd \
+	php-intl \
 	curl \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
@@ -15,9 +22,6 @@ RUN mkdir -p /run/php /var/www/html
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
 	&& chmod +x wp-cli.phar \
 	&& mv wp-cli.phar /usr/local/bin/wp
-
-RUN chown -R www-data:www-data /var/www/html \
-	&& chmod -R 755 /var/www/html
 
 WORKDIR /var/www/html/
 
