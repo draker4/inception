@@ -17,8 +17,9 @@ RUN apt-get update && apt-get upgrade -y && apt-get install -y \
 	&& rm -rf /var/apt/list/*
 
 RUN mkdir /usr/share/adminer && \
-    wget "https://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php && \
-    ln -s /usr/share/adminer/latest.php /usr/share/adminer/adminer.php
+    wget "https://www.adminer.org/latest.php" -O /usr/share/adminer/latest.php \
+    && ln -s /usr/share/adminer/latest.php /usr/share/adminer/adminer.php \
+    && echo "<?php header('Location: /adminer.php'); ?>" > /usr/share/adminer/index.php
 
 EXPOSE 8080
 
