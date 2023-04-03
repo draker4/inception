@@ -7,4 +7,4 @@ RUN apt-get update && apt-get install -y \
 
 EXPOSE 6379
 
-CMD ["redis-server", "--bind 0.0.0.0", "--maxmemory 20mb", "--maxmemory-policy allkeys-lfu", "--protected-mode no"]
+CMD ["redis-server", "--bind 0.0.0.0", "--maxmemory 20mb", "--maxmemory-policy allkeys-lfu", "--protected-mode no", "--dir /data", "--save 60 1"]

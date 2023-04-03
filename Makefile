@@ -10,6 +10,7 @@ DIR_SRCS			=	./srcs/
 DIR_DATA			=	/home/bperriol/data/
 DIR_DATA_WORDPRESS	=	/home/bperriol/data/wordpress/
 DIR_DATA_DATABASE	=	/home/bperriol/data/db/
+DIR_DATA_REDIS		=	/home/bperriol/data/redis/
 
 # ------------  Files  --------------- #
 
@@ -31,15 +32,15 @@ all	:	up
 
 # ---------  Compiled Rules  --------- #
 
-up		:	| $(DIR_DATA_DATABASE) $(DIR_DATA_WORDPRESS)
+up		:	| $(DIR_DATA_DATABASE) $(DIR_DATA_WORDPRESS) $(DIR_DATA_REDIS)
 	@printf "\033[0;33mBuild images, create containers and start them in background\033[0m\n"
 	$(DOCKER_COMPOSE) up -d --build
 
-build	:	| $(DIR_DATA_DATABASE) $(DIR_DATA_WORDPRESS)
+build	:	| $(DIR_DATA_DATABASE) $(DIR_DATA_WORDPRESS) $(DIR_DATA_REDIS)
 	@printf "\033[0;33mBuild images from Dockerfiles\033[0m\n"
 	$(DOCKER_COMPOSE) build
 
-start	:	| $(DIR_DATA_DATABASE) $(DIR_DATA_WORDPRESS)
+start	:	| $(DIR_DATA_DATABASE) $(DIR_DATA_WORDPRESS) $(DIR_DATA_REDIS)
 	@printf "\033[0;33mStart stopped containers\033[0m\n"
 	$(DOCKER_COMPOSE) start
 
@@ -72,6 +73,9 @@ $(DIR_DATA_DATABASE)	:
 
 $(DIR_DATA_WORDPRESS)	:
 	$(MKDIR) $(DIR_DATA_WORDPRESS)
+
+$(DIR_DATA_REDIS)		:
+	$(MKDIR) $(DIR_DATA_REDIS)
 
 # ---------  Usual Commands  --------  #
 

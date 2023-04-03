@@ -128,6 +128,11 @@ volumes:
       device: /home/bperriol/data/db
       o: bind
   redis_cache:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/bperriol/data/redis
+      o: bind
 
 networks:
   inception:
