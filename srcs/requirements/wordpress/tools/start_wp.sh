@@ -2,9 +2,6 @@
 
 set -xv
 
-#chown -R www-data:www-data /var/www/html
-#chmod -R 777 /var/www/html
-
 if [ -f ./wp-config.php ]
 then
 	echo "wordpress well installed"
@@ -42,9 +39,6 @@ else
 fi
 
 chown -R www-data:www-data /var/www/html/
-chmod 777 /var/www/html/
-chmod 777 /var/www/html/wp-content
-chmod 777 /var/www/html/wp-content/plugins/
 
 wp redis enable --force --allow-root
 
