@@ -20,9 +20,12 @@ if [ ! -f "/etc/vsftpd.userlist" ]; then
 	echo "userlist_deny=NO" >> /etc/vsftpd.conf
 	echo "listen_port=21" >> /etc/vsftpd.conf
 	echo "listen_address=0.0.0.0" >> /etc/vsftpd.conf
+	echo "local_umask=022" >> /etc/vsftpd.conf
+	echo "chroot_local_user=YES" >> /etc/vsftpd.conf
 
 	mkdir -p $FTP_USER_HOME/ftp
-	chown -R $FTP_USER_HOME
+	chmod a+w $FTP_USER_HOME/ftp
+	chown -R $FTP_USER_NAME:$FTP_USER_NAME /home/bperriol/
 fi
 
 exec "$@"
