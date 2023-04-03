@@ -18,7 +18,7 @@ DOCKER_COMPOSE_FILE	=	${addprefix ${DIR_SRCS}, docker-compose.yml}
 
 # ----------  Compilation  ----------- #
 
-DOCKER_COMPOSE	=	docker-compose -f $(DOCKER_COMPOSE_FILE)
+DOCKER_COMPOSE	=	docker compose -f $(DOCKER_COMPOSE_FILE)
 
 # ------------  Commands  ------------ #
 
